@@ -1529,7 +1529,7 @@
       n = Math.max(0, Math.min(total - 1, n));
       if (n === idx) return;
       slides[idx].classList.remove('active');
-      slides[idx].classList.add(n > idx ? 'exit-left' : '');
+      if (n > idx) slides[idx].classList.add('exit-left');
       idx = n;
       slides[idx].classList.remove('exit-left');
       slides[idx].classList.add('active');
