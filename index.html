@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La Guajira y su potencial para transformarse en un Puerto Inteligente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy-950: #050b18;
+    --navy-900: #0a1628;
+    --navy-800: #0f2240;
+    --navy-700: #16335c;
+    --navy-600: #1d4480;
+    --teal-500: #06b6d4;
+    --teal-400: #22d3ee;
+    --teal-300: #67e8f9;
+    --coral: #ff7a59;
+    --coral-soft: #ffa285;
+    --gold: #f4c430;
+    --sand: #f6f1e7;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-700: #334155;
+    --grad-deep: linear-gradient(135deg, #050b18 0%, #0a1628 45%, #0f2240 100%);
+    --grad-accent: linear-gradient(135deg, #06b6d4 0%, #1d4480 100%);
+    --grad-sun: linear-gradient(135deg, #ff7a59 0%, #f4c430 100%);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #02060f; color: #e2e8f0; overflow: hidden; -webkit-font-smoothing: antialiased; }
+  body { display: flex; flex-direction: column; }
+
+  /* === DECK CONTAINER === */
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: clamp(28px, 4vw, 64px) clamp(36px, 6vw, 96px);
+    background: var(--grad-deep);
+    color: var(--slate-100);
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 600ms cubic-bezier(.22,1,.36,1), transform 600ms cubic-bezier(.22,1,.36,1);
+    pointer-events: none;
+    overflow: auto;
+  }
+  .slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+  .slide.exit-left { transform: translateX(-40px); }
+
+  /* === SHARED ELEMENTS === */
+  .slide-num {
+    position: absolute;
+    top: clamp(20px, 3vw, 32px);
+    right: clamp(28px, 4vw, 48px);
+    font-family: 'Space Grotesk', monospace;
+    font-size: 13px;
+    color: var(--slate-400);
+    letter-spacing: 0.2em;
+  }
+  .slide-num strong { color: var(--teal-400); font-weight: 600; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--teal-400);
+    margin-bottom: 22px;
+  }
+  .eyebrow::before {
+    content: ''; width: 28px; height: 1px; background: var(--teal-400);
+  }
+
+  h1.slide-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: clamp(34px, 4vw, 60px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  h1.slide-title em { font-style: normal; color: var(--teal-300); }
+
+  h2.slide-subtitle {
+    font-weight: 400;
+    font-size: clamp(18px, 1.55vw, 24px);
+    color: var(--slate-300);
+    max-width: 1000px;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  /* === SLIDE 1 — PORTADA === */
+  .cover {
+    background: var(--grad-deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(36px, 5vw, 72px);
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 70%; height: 140%;
+    background: radial-gradient(ellipse at center, rgba(6,182,212,0.18) 0%, rgba(29,68,128,0.06) 40%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -30%; left: -5%;
+    width: 60%; height: 80%;
+    background: radial-gradient(ellipse at center, rgba(255,122,89,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .cover-decor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(34,211,238,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,211,238,0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(circle at 70% 30%, #000 0%, #000 40%, transparent 75%);
+  }
+  .cover-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 2; }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--slate-300);
+  }
+  .brand-mark {
+    width: 36px; height: 36px;
+    background: var(--grad-accent);
+    border-radius: 8px;
+    position: relative;
+    display: grid; place-items: center;
+  }
+  .brand-mark::before {
+    content: ''; position: absolute; inset: 4px;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    border-radius: 4px;
+  }
+  .brand-mark::after {
+    content: ''; width: 10px; height: 10px;
+    background: #fff; border-radius: 50%;
+    box-shadow: 0 0 12px rgba(255,255,255,0.6);
+  }
+
+  .meta-tag {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--slate-400);
+    border-left: 1px solid rgba(148,163,184,0.3);
+    padding-left: 14px;
+  }
+  .meta-tag strong { color: var(--teal-400); font-weight: 600; }
+
+  .cover-center { position: relative; z-index: 2; max-width: 1100px; }
+  .cover-eyebrow {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--coral); font-weight: 600;
+    margin-bottom: 28px;
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid rgba(255,122,89,0.3);
+    border-radius: 999px;
+    background: rgba(255,122,89,0.06);
+  }
+  .cover-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: clamp(32px, 4.6vw, 68px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 32px;
+    max-width: 100%;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+  .cover-title .accent {
+    background: linear-gradient(135deg, #22d3ee 0%, #67e8f9 50%, #f4c430 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+    font-weight: 800;
+    padding: 0.08em 0.12em 0.18em 0;
+    display: inline-block;
+    line-height: 1.18;
+    margin-bottom: -0.18em;
+  }
+  .cover-sub {
+    font-size: clamp(16px, 1.5vw, 22px);
+    color: var(--slate-300);
+    max-width: 760px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+  .cover-pillars { display: flex; flex-wrap: wrap; gap: 14px; }
+  .pillar {
+    padding: 8px 16px;
+    background: rgba(34,211,238,0.08);
+    border: 1px solid rgba(34,211,238,0.25);
+    border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    color: var(--teal-300);
+    backdrop-filter: blur(4px);
+  }
+
+  .cover-bottom {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    position: relative; z-index: 2;
+  }
+  .author-block {
+    font-size: 12px; color: var(--slate-400); letter-spacing: 0.04em;
+  }
+  .author-block strong { color: #fff; font-weight: 600; font-size: 14px; display: block; margin-bottom: 4px; letter-spacing: 0; }
+  .source-block { text-align: right; font-size: 11px; color: var(--slate-500); letter-spacing: 0.16em; text-transform: uppercase; }
+  .source-block strong { color: var(--gold); font-size: 12px; }
+
+  /* === LAYOUT GRIDS === */
+  .slide-body {
+    height: calc(100% - 80px);
+    display: grid;
+    gap: 28px;
+  }
+  .grid-2 { grid-template-columns: 1fr 1fr; align-items: start; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); align-items: stretch; }
+  .grid-1-2 { grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+  .grid-2-1 { grid-template-columns: 1fr 0.7fr; align-items: start; }
+
+  /* === CARDS === */
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(148,163,184,0.12);
+    border-radius: 16px;
+    padding: 22px 24px;
+    backdrop-filter: blur(8px);
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover { border-color: rgba(34,211,238,0.4); transform: translateY(-2px); }
+  .card .label {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--teal-400);
+    margin-bottom: 12px; display: block;
+  }
+  .card h3 {
+    font-size: 22px; font-weight: 700; color: #fff;
+    margin-bottom: 12px; line-height: 1.25;
+  }
+  .card p { font-size: 16px; color: var(--slate-300); line-height: 1.55; }
+
+  .card-num {
+    position: absolute; top: 18px; right: 22px;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 32px; font-weight: 700;
+    color: rgba(34,211,238,0.18);
+    line-height: 1;
+  }
+
+  /* Stat card */
+  .stat-card {
+    text-align: left;
+    padding: 24px;
+    background: linear-gradient(160deg, rgba(34,211,238,0.08), rgba(29,68,128,0.04));
+    border: 1px solid rgba(34,211,238,0.18);
+    border-radius: 14px;
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 3.6vw, 50px);
+    font-weight: 700;
+    color: var(--teal-300);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 14.5px;
+    color: var(--slate-300);
+    line-height: 1.45;
+  }
+  .stat-label strong { color: #fff; }
+
+  /* Bullets */
+  ul.bullets { list-style: none; padding: 0; }
+  ul.bullets li {
+    position: relative;
+    padding: 12px 0 12px 30px;
+    font-size: 17px;
+    color: var(--slate-200);
+    line-height: 1.55;
+    border-bottom: 1px solid rgba(148,163,184,0.08);
+  }
+  ul.bullets li:last-child { border-bottom: none; }
+  ul.bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 18px;
+    width: 14px; height: 2px;
+    background: var(--teal-400);
+    border-radius: 2px;
+  }
+  ul.bullets li strong { color: #fff; font-weight: 600; }
+  ul.bullets li em { color: var(--coral-soft); font-style: normal; font-weight: 500; }
+
+  /* Quote */
+  .quote-box {
+    border-left: 3px solid var(--coral);
+    padding: 18px 22px;
+    background: rgba(255,122,89,0.05);
+    border-radius: 0 12px 12px 0;
+    margin-top: 20px;
+  }
+  .quote-box p { font-size: 16px; color: #fff; font-style: italic; line-height: 1.5; }
+  .quote-box cite {
+    display: block; margin-top: 10px;
+    font-size: 12.5px; font-style: normal;
+    color: var(--coral-soft); letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  /* Pill / tag */
+  .tag {
+    display: inline-block;
+    padding: 6px 13px;
+    background: rgba(244,196,48,0.1);
+    border: 1px solid rgba(244,196,48,0.3);
+    border-radius: 999px;
+    font-size: 13.5px; font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    margin: 0 5px 6px 0;
+  }
+  .tag.teal { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); color: var(--teal-300); }
+  .tag.coral { background: rgba(255,122,89,0.1); border-color: rgba(255,122,89,0.3); color: var(--coral-soft); }
+
+  /* === NAV === */
+  .nav-bar {
+    position: fixed;
+    bottom: 18px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 18px;
+    background: rgba(5,11,24,0.7);
+    border: 1px solid rgba(148,163,184,0.18);
+    border-radius: 999px;
+    backdrop-filter: blur(14px);
+  }
+  .nav-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(34,211,238,0.1);
+    border: 1px solid rgba(34,211,238,0.3);
+    color: var(--teal-300);
+    cursor: pointer;
+    display: grid; place-items: center;
+    transition: 0.2s;
+    font-size: 14px;
+  }
+  .nav-btn:hover { background: var(--teal-500); color: #fff; }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-counter {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 12px; letter-spacing: 0.2em;
+    color: var(--slate-300);
+    min-width: 60px; text-align: center;
+  }
+  .nav-counter strong { color: var(--teal-400); font-weight: 600; }
+
+  /* Progress dots */
+  .progress {
+    position: fixed;
+    top: 50%; right: 18px;
+    transform: translateY(-50%);
+    z-index: 40;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(148,163,184,0.25);
+    cursor: pointer;
+    transition: 0.25s;
+  }
+  .dot.active { background: var(--teal-400); transform: scale(1.4); box-shadow: 0 0 12px rgba(34,211,238,0.6); }
+  .dot:hover { background: var(--teal-300); }
+
+  /* === SLIDE 4: BID Levels === */
+  .levels-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .level-card {
+    position: relative;
+    padding: 20px 18px 24px;
+    background: linear-gradient(180deg, rgba(34,211,238,0.06), rgba(34,211,238,0.01));
+    border: 1px solid rgba(34,211,238,0.2);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .level-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--teal-400), transparent);
+  }
+  .level-num {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 11px; letter-spacing: 0.3em;
+    color: var(--teal-400);
+    font-weight: 600;
+  }
+  .level-card h3 { font-size: 19px; margin: 10px 0 14px; color: #fff; line-height: 1.25; }
+  .level-card p { font-size: 15px; color: var(--slate-300); line-height: 1.5; }
+  .level-card .arrow {
+    position: absolute;
+    right: -14px; top: 30px;
+    color: var(--teal-400);
+    font-size: 18px; opacity: 0.5;
+  }
+  .level-card:last-child .arrow { display: none; }
+
+  /* === SLIDE 5: Dimensions hexagon-ish === */
+  .dim-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .dim-card {
+    padding: 22px 18px;
+    background: rgba(15, 34, 64, 0.6);
+    border: 1px solid rgba(148,163,184,0.15);
+    border-radius: 14px;
+    text-align: center;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .dim-card:hover {
+    border-color: var(--teal-400);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(6,182,212,0.15);
+  }
+  .dim-icon {
+    width: 48px; height: 48px;
+    margin: 0 auto 14px;
+    background: linear-gradient(135deg, var(--teal-500), var(--navy-700));
+    border-radius: 12px;
+    display: grid; place-items: center;
+    font-size: 22px;
+  }
+  .dim-card h4 { font-size: 17px; color: #fff; margin-bottom: 10px; font-weight: 700; letter-spacing: 0.02em; }
+  .dim-card p { font-size: 14px; color: var(--slate-300); line-height: 1.5; }
+
+  /* === Benchmark cases === */
+  .benchmark { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 16px; }
+  .bench-card {
+    padding: 24px;
+    background: linear-gradient(180deg, rgba(15,34,64,0.7), rgba(10,22,40,0.8));
+    border: 1px solid rgba(148,163,184,0.18);
+    border-radius: 16px;
+    position: relative;
+  }
+  .bench-flag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(34,211,238,0.12);
+    color: var(--teal-300);
+    font-family: 'Space Grotesk', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .bench-card h3 { font-size: 26px; color: #fff; margin-bottom: 8px; font-weight: 800; }
+  .bench-card .role { font-size: 13.5px; color: var(--coral-soft); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+  .bench-card ul.bullets li { font-size: 15px; padding: 9px 0 9px 24px; }
+  .bench-card ul.bullets li::before { top: 17px; }
+
+  /* === Map / Geo === */
+  .map-wrap {
+    background: linear-gradient(160deg, rgba(15,34,64,0.5), rgba(5,11,24,0.7));
+    border: 1px solid rgba(148,163,184,0.15);
+    border-radius: 16px;
+    padding: 22px;
+    height: 100%;
+    display: flex; flex-direction: column;
+  }
+  .map-svg { width: 100%; flex: 1; min-height: 240px; }
+
+  /* === Roadmap === */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+    position: relative;
+  }
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    top: 30px; left: 8%; right: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--teal-400), var(--coral), var(--gold));
+    z-index: 0;
+  }
+  .phase {
+    background: linear-gradient(180deg, rgba(15,34,64,0.85), rgba(5,11,24,0.95));
+    border: 1px solid rgba(148,163,184,0.2);
+    border-radius: 14px;
+    padding: 22px 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .phase-dot {
+    position: absolute;
+    top: -8px; left: 22px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--navy-950);
+  }
+  .phase.short .phase-dot { background: var(--teal-400); }
+  .phase.medium .phase-dot { background: var(--coral); }
+  .phase.long .phase-dot { background: var(--gold); }
+  .phase-time {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    margin-bottom: 6px; font-weight: 600;
+  }
+  .phase.short .phase-time { color: var(--teal-300); }
+  .phase.medium .phase-time { color: var(--coral-soft); }
+  .phase.long .phase-time { color: var(--gold); }
+  .phase h4 { color: #fff; font-size: 19px; margin-bottom: 8px; }
+  .phase p.lead { color: var(--slate-300); font-size: 14.5px; margin-bottom: 14px; line-height: 1.5; }
+  .phase ul.bullets li { font-size: 14.5px; padding: 8px 0 8px 24px; border-bottom: none; }
+  .phase ul.bullets li::before { width: 10px; height: 2px; top: 17px; }
+
+  /* === Closing slide === */
+  .closing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    padding: 60px 80px;
+    background: var(--grad-deep);
+    position: relative;
+    overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 1200px; height: 1200px;
+    background: radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 60%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .closing-msg {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(32px, 4.5vw, 60px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: #fff;
+    max-width: 1100px;
+    margin-bottom: 26px;
+    position: relative; z-index: 2;
+  }
+  .closing-msg span.h { color: var(--teal-300); font-style: italic; }
+  .closing-cta {
+    font-size: 18px;
+    color: var(--slate-300);
+    line-height: 1.5;
+    max-width: 800px;
+    margin-bottom: 32px;
+    position: relative; z-index: 2;
+  }
+  .closing-cta strong { color: var(--coral); }
+
+  .stat-row {
+    display: flex; gap: 36px;
+    margin-top: 22px;
+    position: relative; z-index: 2;
+  }
+  .stat-row .stat {
+    border-left: 2px solid var(--teal-400);
+    padding-left: 16px;
+  }
+  .stat-row .stat .n {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(20px, 2.4vw, 32px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stat-row .stat .d { font-size: 12px; color: var(--slate-400); margin-top: 4px; }
+
+  /* === Mini chart bar === */
+  .bar-chart { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+  .bar-row { display: flex; align-items: center; gap: 14px; font-size: 14.5px; }
+  .bar-name { width: 160px; color: var(--slate-300); }
+  .bar-track { flex: 1; height: 22px; background: rgba(148,163,184,0.1); border-radius: 4px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--teal-500), var(--teal-300)); border-radius: 4px; display: flex; align-items: center; padding-left: 10px; color: #02060f; font-weight: 700; font-size: 13px; }
+  .bar-fill.coral { background: linear-gradient(90deg, var(--coral), var(--gold)); }
+  .bar-val { width: 80px; text-align: right; color: #fff; font-weight: 600; font-size: 14px; }
+
+  /* === Tab tag === */
+  .insight-banner {
+    margin-top: 20px;
+    padding: 16px 22px;
+    background: linear-gradient(135deg, rgba(255,122,89,0.1), rgba(244,196,48,0.06));
+    border-left: 3px solid var(--coral);
+    border-radius: 0 12px 12px 0;
+    font-size: 16px;
+    color: var(--slate-200);
+    line-height: 1.55;
+  }
+  .insight-banner strong { color: var(--coral-soft); display: block; margin-bottom: 6px; font-size: 12.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; }
+
+  /* === Help === */
+  .help {
+    position: fixed;
+    bottom: 20px; left: 20px;
+    z-index: 60;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--slate-500);
+    text-transform: uppercase;
+  }
+  .help kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    background: rgba(148,163,184,0.12);
+    border: 1px solid rgba(148,163,184,0.25);
+    border-radius: 4px;
+    color: var(--slate-300);
+    margin: 0 2px;
+    font-family: inherit;
+  }
+
+  /* Print */
+  @media print {
+    body, html { overflow: visible; height: auto; background: #fff; }
+    .deck { height: auto; }
+    .slide { position: relative; opacity: 1 !important; transform: none !important; page-break-after: always; height: 100vh; pointer-events: auto; }
+    .nav-bar, .progress, .help { display: none !important; }
+  }
+
+  @media (max-width: 1100px) {
+    .grid-3, .grid-4, .levels-grid, .dim-grid, .benchmark, .roadmap { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-1-2, .grid-2-1 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 1 — PORTADA                                              -->
+  <!-- ============================================================ -->
+  <section class="slide cover active" data-slide="1">
+    <div class="cover-decor"><div class="cover-grid"></div></div>
+
+    <div class="cover-top">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <span>Smart Port Strategy &middot; Caribe Colombiano</span>
+      </div>
+      <div class="meta-tag">Presentación ejecutiva &nbsp;·&nbsp; <strong>2026</strong></div>
+    </div>
+
+    <div class="cover-center">
+      <span class="cover-eyebrow">Estrategia &amp; Hoja de Ruta</span>
+      <h1 class="cover-title">
+        La Guajira y su potencial<br/>para transformarse en un<br/><span class="accent">Puerto Inteligente</span>
+      </h1>
+      <p class="cover-sub">
+        Un argumento técnico y estratégico para reposicionar la región como nodo logístico, energético y digital del Caribe — alineado con el Manual de Puertos Inteligentes del BID (2020).
+      </p>
+      <div class="cover-pillars">
+        <span class="pillar">Digitalización</span>
+        <span class="pillar">Transición energética</span>
+        <span class="pillar">Sostenibilidad</span>
+        <span class="pillar">Gobernanza</span>
+        <span class="pillar">Integración logística</span>
+      </div>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="author-block">
+        <strong>Tatiana Rabat</strong>
+        Project Management &amp; Estrategia Portuaria
+      </div>
+      <div class="source-block">
+        Marco de referencia<br/>
+        <strong>BID · Fundación Valenciaport (2020)</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 2 — CONTEXTO GLOBAL                                      -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="2">
+    <div class="slide-num">SLIDE <strong>02</strong> / 15</div>
+    <span class="eyebrow">Contexto Global</span>
+    <h1 class="slide-title">El puerto del siglo <em>XXI</em> es digital, verde y conectado</h1>
+    <h2 class="slide-subtitle">La cuarta revolución industrial está redefiniendo el comercio marítimo: digitalización extremo a extremo, descarbonización acelerada y automatización son la nueva línea base de la competitividad portuaria.</h2>
+
+    <div class="slide-body grid-2">
+      <div>
+        <ul class="bullets">
+          <li><strong>USD 7,95B en 2030</strong> — el mercado global de Smart Ports crece a CAGR <em>25,8 %</em>.</li>
+          <li><strong>3 macrotendencias convergentes:</strong> Industria 4.0, transición energética y economía circular.</li>
+          <li><strong>Presión regulatoria:</strong> Acuerdo de París, IMO 2050 y Carbon Border Adjustment (UE).</li>
+          <li><strong>Convergencia ciudad-puerto:</strong> Smart City + Smart Port en una sola plataforma.</li>
+        </ul>
+
+        <div class="quote-box">
+          <p>"La industria portuaria debe pasar del control de recursos a la gestión del ecosistema."</p>
+          <cite>— Yan Jun · CEO, Shanghai International Port (Group)</cite>
+        </div>
+      </div>
+
+      <div>
+        <div class="stat-card" style="margin-bottom: 18px;">
+          <div class="stat-num">180,5 Mt</div>
+          <div class="stat-label">movilizadas en puertos colombianos en 2024. El <strong>Caribe concentra el 87 %</strong> del total nacional.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">USD 600 M</div>
+          <div class="stat-label"><strong>Estrategia BID-Colombia 2024-2027</strong> con foco en infraestructura, renovables y telecomunicaciones.</div>
+        </div>
+
+        <div class="insight-banner">
+          <strong>Insight</strong>
+          La ventana para capturar share del Smart Port toolkit BID-Valenciaport es <em>limitada</em>: Callao, Chancay y Cartagena ya están en ruta.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 3 — ¿QUÉ ES UN PUERTO INTELIGENTE?                       -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="3">
+    <div class="slide-num">SLIDE <strong>03</strong> / 15</div>
+    <span class="eyebrow">Marco Conceptual</span>
+    <h1 class="slide-title">¿Qué es un <em>Puerto Inteligente</em>?</h1>
+    <h2 class="slide-subtitle">Un Smart Port no es solo un puerto con tecnología: es un ecosistema interconectado donde personas, procesos y plataformas crean valor compartido para la comunidad portuaria, la ciudad y la cadena logística global.</h2>
+
+    <div class="slide-body grid-1-2">
+      <div>
+        <div class="card" style="margin-bottom: 16px;">
+          <span class="label">Definición BID (2020)</span>
+          <h3>Industria 4.0 aplicada al puerto</h3>
+          <p>Un puerto inteligente utiliza tecnologías emergentes — <strong>IoT, Big Data, Blockchain, IA y Machine Learning</strong> — para mejorar competitividad económica, eficiencia operativa, sostenibilidad social, ambiental y energética, y la seguridad de las instalaciones. Transforma la cadena de valor portuaria en un <em>ecosistema abierto e interconectado</em>.</p>
+        </div>
+
+        <div class="quote-box">
+          <p>"Los activos físicos conforman la infraestructura portuaria, mientras que los activos digitales conforman su <strong>infoestructura</strong>."</p>
+          <cite>— Francesc Sánchez · Autoridad Portuaria de Valencia</cite>
+        </div>
+
+        <div class="quote-box" style="margin-top: 14px; border-left-color: var(--gold); background: rgba(244,196,48,0.05);">
+          <p>"No existirá un Smart Port sin <strong>Smart People</strong>."</p>
+          <cite style="color: var(--gold);">— Miguel Garín · Fundación Valenciaport</cite>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <span class="label">Tradicional vs. Inteligente</span>
+          <table style="width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 15px;">
+            <tr style="border-bottom: 1px solid rgba(148,163,184,0.15);">
+              <td style="padding: 12px 10px; color: var(--slate-400); width: 32%;">Operación</td>
+              <td style="padding: 12px 10px; color: var(--slate-300);">Control de recursos</td>
+              <td style="padding: 12px 10px; color: var(--teal-300); font-weight: 600;">Gestión de ecosistema</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(148,163,184,0.15);">
+              <td style="padding: 12px 10px; color: var(--slate-400);">Información</td>
+              <td style="padding: 12px 10px; color: var(--slate-300);">Silos / papel</td>
+              <td style="padding: 12px 10px; color: var(--teal-300); font-weight: 600;">PCS · APIs</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(148,163,184,0.15);">
+              <td style="padding: 12px 10px; color: var(--slate-400);">Eficiencia</td>
+              <td style="padding: 12px 10px; color: var(--slate-300);">Procesos manuales</td>
+              <td style="padding: 12px 10px; color: var(--teal-300); font-weight: 600;">Automatización + IA</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 10px; color: var(--slate-400);">Sostenibilidad</td>
+              <td style="padding: 12px 10px; color: var(--slate-300);">Reactiva</td>
+              <td style="padding: 12px 10px; color: var(--teal-300); font-weight: 600;">Cero emisiones</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="insight-banner">
+          <strong>Tres pilares fundacionales</strong>
+          Tecnologías + Estrategia digital + <em>Personas</em> = Productividad + Seguridad + Sostenibilidad.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 4 — MARCO DEL BID 2020                                   -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="4">
+    <div class="slide-num">SLIDE <strong>04</strong> / 15</div>
+    <span class="eyebrow">Marco BID · Fundación Valenciaport</span>
+    <h1 class="slide-title">Cuatro niveles de <em>transformación digital</em> portuaria</h1>
+    <h2 class="slide-subtitle">El Manual del BID (2020) propone una progresión holística: la inteligencia portuaria no se logra en una sola entidad, sino en la coordinación del ecosistema completo. Cada nivel desbloquea el siguiente.</h2>
+
+    <div class="levels-grid">
+      <div class="level-card">
+        <span class="level-num">NIVEL 1</span>
+        <h3>Transformación digital interna</h3>
+        <p>Cada empresa u organismo digitaliza sus procesos internos: ERP, sistemas de calidad, automatización de back-office. Foco en eficiencia individual.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="level-card">
+        <span class="level-num">NIVEL 2</span>
+        <h3>El puerto conectado</h3>
+        <p>La digitalización supera fronteras organizacionales. Ventanilla Única, citas electrónicas, declaraciones online, coordinación administración–terminales.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="level-card">
+        <span class="level-num">NIVEL 3</span>
+        <h3>Comunidad portuaria conectada</h3>
+        <p>Sinergia de toda la comunidad logística. <strong>PCS · Port Community System</strong> rompe silos y crea un nodo logístico coordinado.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="level-card">
+        <span class="level-num">NIVEL 4</span>
+        <h3>Puerto hiperconectado</h3>
+        <p>IoT + Cloud + Blockchain + Digital Twin + IA. Personas, organizaciones e infraestructura conectados con corredores marítimos y terrestres globales.</p>
+      </div>
+    </div>
+
+    <div class="slide-body grid-3" style="margin-top: 28px; height: auto;">
+      <div class="card">
+        <span class="label">3 ejes de valor</span>
+        <h3>Productividad</h3>
+        <p>Excelencia operativa, modernización y reducción de costos a lo largo de la cadena.</p>
+      </div>
+      <div class="card">
+        <span class="label">3 ejes de valor</span>
+        <h3>Seguridad &amp; protección</h3>
+        <p>Industrial, física y ciber. Protección del dominio público y los datos.</p>
+      </div>
+      <div class="card">
+        <span class="label">3 ejes de valor</span>
+        <h3>Sostenibilidad</h3>
+        <p>Energética, ambiental y social. Cero emisiones, economía circular y capital humano.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 5 — DIMENSIONES                                          -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="5">
+    <div class="slide-num"></div>
+    <span class="eyebrow">Dimensiones Estratégicas</span>
+    <h1 class="slide-title">Las cinco dimensiones de un <em>Smart Port</em></h1>
+    <h2 class="slide-subtitle">El modelo BID se materializa en cinco frentes simultáneos. Avanzar en uno sin los otros produce digitalización fragmentada — no inteligencia.</h2>
+
+    <div class="dim-grid">
+      <div class="dim-card">
+        <div class="dim-icon">⚙️</div>
+        <h4>OPERACIONAL</h4>
+        <p>Automatización de muelles, grúas con IA, mantenimiento predictivo y rotación de buques.</p>
+      </div>
+      <div class="dim-card">
+        <div class="dim-icon">🌱</div>
+        <h4>AMBIENTAL</h4>
+        <p>Cold ironing, combustibles alternativos, IoT de calidad ambiental y economía circular.</p>
+      </div>
+      <div class="dim-card">
+        <div class="dim-icon">🚛</div>
+        <h4>LOGÍSTICA</h4>
+        <p>PCS, Ventanilla Única, transporte multimodal e integración con corredores globales.</p>
+      </div>
+      <div class="dim-card">
+        <div class="dim-icon">🏛️</div>
+        <h4>GOBERNANZA</h4>
+        <p>Modelos público-privados, ciberseguridad, transparencia y gestión del cambio.</p>
+      </div>
+      <div class="dim-card">
+        <div class="dim-icon">🔗</div>
+        <h4>TECNOLÓGICA</h4>
+        <p>IoT, 5G, Big Data, Blockchain, IA/ML, Digital Twin y arquitectura SOA.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 6 — TECNOLOGÍAS Y APLICACIONES                            -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="6">
+    <div class="slide-num"></div>
+    <span class="eyebrow">Stack Tecnológico</span>
+    <h1 class="slide-title">El <em>kit de herramientas</em> de un Smart Port</h1>
+    <h2 class="slide-subtitle">Tecnologías facilitadoras y aplicaciones tipo recomendadas por el BID. No todas se implementan a la vez — se priorizan según diagnóstico inicial.</h2>
+
+    <div class="slide-body grid-2" style="margin-top: 24px; height: auto;">
+      <div>
+        <span class="eyebrow" style="margin-bottom: 16px;">Tecnologías facilitadoras</span>
+        <div style="display: flex; flex-wrap: wrap; margin-top: 14px;">
+          <span class="tag teal">IIoT</span>
+          <span class="tag teal">5G / NB-IoT</span>
+          <span class="tag teal">Big Data</span>
+          <span class="tag teal">Blockchain</span>
+          <span class="tag teal">IA / ML</span>
+          <span class="tag teal">Digital Twin</span>
+          <span class="tag teal">Cloud</span>
+          <span class="tag teal">Drones</span>
+          <span class="tag teal">SCADA</span>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow" style="margin-bottom: 16px;">Aplicaciones tipo</span>
+        <div style="display: flex; flex-wrap: wrap; margin-top: 14px;">
+          <span class="tag">PCS · Port Community System</span>
+          <span class="tag">VUCE</span>
+          <span class="tag">TOS automatizado</span>
+          <span class="tag">VTS marítimo</span>
+          <span class="tag">Cold ironing</span>
+          <span class="tag">Smart gates</span>
+          <span class="tag">Predictive ETA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 6 — BENEFICIOS                                            -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="6">
+    <div class="slide-num">SLIDE <strong>06</strong> / 15</div>
+    <span class="eyebrow">Propuesta de valor</span>
+    <h1 class="slide-title">¿Por qué transformarse? Los <em>beneficios</em> que entrega un Smart Port</h1>
+    <h2 class="slide-subtitle">Un puerto inteligente no es un costo de TI: es una palanca de crecimiento que multiplica ingresos, reduce externalidades y reposiciona al territorio en cadenas globales de valor.</h2>
+
+    <div class="slide-body grid-4" style="height: auto;">
+      <div class="card">
+        <div class="card-num">01</div>
+        <span class="label">Competitividad</span>
+        <h3>Captura de tráfico</h3>
+        <p>Reducción de tiempos de escala 15–25 %, mayor productividad por grúa-hora y atracción de líneas navieras premium.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <span class="label">Eficiencia</span>
+        <h3>Costos operativos</h3>
+        <p>Ahorro estimado 12–20 % por automatización, mantenimiento predictivo y eliminación de procesos en papel.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <span class="label">Sostenibilidad</span>
+        <h3>Cero emisiones</h3>
+        <p>Cold ironing, combustibles alternativos y energías renovables eliminan hasta 70 % de emisiones en muelle.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">04</div>
+        <span class="label">Integración</span>
+        <h3>Smart City-Port</h3>
+        <p>Reducción de congestión, ruido y contaminación urbana. Diálogo permanente con la comunidad y empleos cualificados.</p>
+      </div>
+    </div>
+
+    <div class="slide-body grid-2" style="margin-top: 32px; height: auto;">
+      <div>
+        <span class="eyebrow" style="margin-bottom: 14px;">Impacto operativo medible</span>
+        <div class="bar-chart">
+          <div class="bar-row"><div class="bar-name">Tiempo de escala</div><div class="bar-track"><div class="bar-fill" style="width: 78%;">−22%</div></div><div class="bar-val">vs. base</div></div>
+          <div class="bar-row"><div class="bar-name">Productividad grúa</div><div class="bar-track"><div class="bar-fill" style="width: 65%;">+30%</div></div><div class="bar-val">mov/h</div></div>
+          <div class="bar-row"><div class="bar-name">Costo operativo</div><div class="bar-track"><div class="bar-fill coral" style="width: 55%;">−18%</div></div><div class="bar-val">unitario</div></div>
+          <div class="bar-row"><div class="bar-name">Emisiones CO₂ muelle</div><div class="bar-track"><div class="bar-fill coral" style="width: 80%;">−65%</div></div><div class="bar-val">cold ironing</div></div>
+        </div>
+        <p style="font-size: 12px; color: var(--slate-500); margin-top: 12px;">Rangos referenciales en pilotos Smart Port (Rotterdam, Barcelona, Valencia).</p>
+      </div>
+      <div style="display: flex; align-items: center; height: 100%;">
+        <div class="insight-banner" style="margin-top: 0;">
+          <strong>Insight estratégico</strong>
+          El Smart Port no compite por <em>volumen</em>: compite por <em>tiempo, datos y reputación ambiental</em>. Para La Guajira, esa propuesta de valor es accesible incluso sin alcanzar el tonelaje de Cartagena.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 7 — CASOS DE REFERENCIA                                   -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="7">
+    <div class="slide-num">SLIDE <strong>07</strong> / 15</div>
+    <span class="eyebrow">Benchmark Internacional</span>
+    <h1 class="slide-title">Lo que ya están haciendo los <em>líderes globales</em></h1>
+    <h2 class="slide-subtitle">Tres casos que demuestran que el Smart Port no es teoría — es ventaja competitiva probada. La Guajira no necesita inventar el modelo: necesita adaptarlo.</h2>
+
+    <div class="benchmark">
+      <div class="bench-card">
+        <span class="bench-flag">🇳🇱 ROTTERDAM</span>
+        <h3>Maritime Capital of Europe</h3>
+        <div class="role">Digital Twin · Innovation Hub</div>
+        <ul class="bullets">
+          <li><strong>−20 % en tiempos de espera</strong> con Digital Twin operativo en toda la bahía.</li>
+          <li><em>PortXchange</em>: AI + Blockchain para sincronizar arribo de buques con servicios.</li>
+          <li>Ecosistema PortXL · SmartPort · RDM Campus → 3 universidades + 200 startups.</li>
+          <li>Inversión sostenida: meta carbono-neutral 2050.</li>
+        </ul>
+      </div>
+      <div class="bench-card">
+        <span class="bench-flag" style="background: rgba(244,196,48,0.12); color: var(--gold);">🇸🇬 SINGAPUR · PSA TUAS</span>
+        <h3>El puerto del futuro</h3>
+        <div class="role">Automatización total · IA · 65M TEU/año</div>
+        <ul class="bullets">
+          <li><strong>Mayor terminal automatizada del mundo</strong> a plena capacidad en 2040.</li>
+          <li><em>Maritime Single Window</em> + 200+ AGVs autónomos.</li>
+          <li>MPA + SMI + Pier71: ecosistema de innovación nacional.</li>
+          <li>Modelo de gobernanza estatal con eficiencia privada.</li>
+        </ul>
+      </div>
+      <div class="bench-card">
+        <span class="bench-flag" style="background: rgba(255,122,89,0.12); color: var(--coral-soft);">🇪🇸 BARCELONA</span>
+        <h3>Smart Port Mediterráneo</h3>
+        <div class="role">PCS · Hutchison Ports BEST · Smart Solutions</div>
+        <ul class="bullets">
+          <li><strong>220+ movimientos/buque-hora</strong>, 40 mov/grúa-hora — primera terminal semi-automatizada del Mediterráneo.</li>
+          <li>PCS conectado con Port Community 360°.</li>
+          <li>Programa Smart Port Solutions con startups y universidades.</li>
+          <li>Integración ciudad-puerto: cruceros + zonas verdes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-banner" style="margin-top: 22px;">
+      <strong>Lección aplicada a La Guajira</strong>
+      Los tres casos comparten <em>tres palancas comunes</em>: (1) Liderazgo institucional con visión a 20 años, (2) ecosistema de innovación con academia y startups, (3) métricas operativas públicas que generan accountability. Sin esos tres elementos, el resto es solo software.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 8 — SISTEMA PORTUARIO COLOMBIANO                          -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="8">
+    <div class="slide-num">SLIDE <strong>08</strong> / 15</div>
+    <span class="eyebrow">Sistema portuario colombiano</span>
+    <h1 class="slide-title">Colombia mueve <em>180 Mt/año</em> — y el Caribe domina</h1>
+    <h2 class="slide-subtitle">El sistema portuario colombiano está concentrado en cuatro zonas. La Guajira aparece principalmente como <em>exportador monocarbón</em>, sin diversificación significativa de carga contenedorizada.</h2>
+
+    <div class="slide-body grid-1-2" style="height: auto;">
+      <div>
+        <span class="eyebrow" style="margin-bottom: 14px;">Tráfico portuario nacional 2024 — % participación</span>
+        <div class="bar-chart" style="margin-top: 14px;">
+          <div class="bar-row"><div class="bar-name">Cartagena</div><div class="bar-track"><div class="bar-fill" style="width: 100%;">27,8%</div></div><div class="bar-val">50,1 Mt</div></div>
+          <div class="bar-row"><div class="bar-name">Ciénaga</div><div class="bar-track"><div class="bar-fill" style="width: 65%;">18,1%</div></div><div class="bar-val">32,6 Mt</div></div>
+          <div class="bar-row"><div class="bar-name">G. Morrosquillo</div><div class="bar-track"><div class="bar-fill" style="width: 51%;">14,3%</div></div><div class="bar-val">25,8 Mt</div></div>
+          <div class="bar-row"><div class="bar-name">Buenaventura</div><div class="bar-track"><div class="bar-fill" style="width: 33%;">9,3%</div></div><div class="bar-val">16,7 Mt</div></div>
+          <div class="bar-row"><div class="bar-name">Barranquilla</div><div class="bar-track"><div class="bar-fill" style="width: 25%;">6,9%</div></div><div class="bar-val">12,5 Mt</div></div>
+          <div class="bar-row"><div class="bar-name">La Guajira</div><div class="bar-track"><div class="bar-fill coral" style="width: 21%;">~6%</div></div><div class="bar-val">~12 Mt</div></div>
+          <div class="bar-row"><div class="bar-name">Otros</div><div class="bar-track"><div class="bar-fill" style="width: 25%;">17,5%</div></div><div class="bar-val">31,4 Mt</div></div>
+        </div>
+        <p style="font-size: 11px; color: var(--slate-500); margin-top: 14px;">Fuente: Mintransporte, Supertransporte, Boletín Estadístico Tráfico Portuario 2024 · La Guajira refleja datos de exportación Cerrejón 2025 (12,8 Mt).</p>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom: 14px;">
+          <span class="label">Posición del Caribe</span>
+          <h3>87 % del tráfico nacional</h3>
+          <p>El Caribe colombiano movilizó <strong>157,2 Mt</strong> en 2024 vs. 20,6 Mt del Pacífico. Es la columna vertebral de la conectividad colombiana con EE.UU., UE y Centroamérica.</p>
+        </div>
+        <ul class="bullets">
+          <li><strong>Cartagena</strong> opera al límite de capacidad — espacio creciente para hubs alternativos.</li>
+          <li><strong>Santa Marta</strong> creció <em>+7,4 %</em> en exportaciones 2024 — apetito por carga diversificada.</li>
+          <li><strong>Ciénaga</strong>: 100 % carbón (igual que Puerto Bolívar) — vulnerable al ciclo del mineral.</li>
+          <li>Colombia es <em>el quinto país de LatAm</em> con mayor tráfico portuario, pero solo Cartagena tiene madurez Smart Port avanzada.</li>
+        </ul>
+        <div class="insight-banner">
+          <strong>Diagnóstico</strong>
+          La Guajira tiene <em>infraestructura instalada (40 Mt + 32 Mt)</em> pero subutilizada en carga diversificada. Hay capacidad ociosa estructural antes incluso del cliff carbonífero.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 9 — LA GUAJIRA HOY                                        -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="9">
+    <div class="slide-num">SLIDE <strong>09</strong> / 15</div>
+    <span class="eyebrow">Diagnóstico territorial</span>
+    <h1 class="slide-title">La Guajira <em>hoy</em>: un activo estratégico subutilizado</h1>
+    <h2 class="slide-subtitle">Geografía privilegiada, infraestructura existente, pero un modelo económico monoproductivo y fragilidad social que limitan el potencial.</h2>
+
+    <div class="slide-body grid-1-2" style="height: auto;">
+      <div>
+        <span class="eyebrow" style="margin-bottom: 14px;">Activos portuarios actuales</span>
+        <ul class="bullets">
+          <li><strong>Puerto Bolívar (Cerrejón):</strong> 40 Mt/año capacidad, recibe Capesize hasta 180.000 DWT, calado 19 m, ferrocarril privado de 150 km.</li>
+          <li><strong>Puerto Brisa (Dibulla):</strong> Multipropósito 32 Mt, muelle 360 m, ya manejó 26.000 t de componentes eólicos.</li>
+          <li><strong>Puerto Nuevo (Pensoport):</strong> Concesión a 20 años en Bahía Portete — proyecto multipropósito.</li>
+          <li><strong>403 km de costa Caribe</strong> con cercanía única al Canal de Panamá y a Aruba/Curazao.</li>
+        </ul>
+        <div class="quote-box" style="margin-top: 14px;">
+          <p>"La Guajira es <strong>el eslabón logístico que Colombia no puede seguir posponiendo</strong>: a 150 km de Aruba, &lt;200 km de Curazao."</p>
+          <cite>— Diario del Norte · 2025</cite>
+        </div>
+      </div>
+
+      <div>
+        <div class="stat-card" style="margin-bottom: 12px;">
+          <div class="stat-num" style="color: var(--coral-soft);">−21,2 %</div>
+          <div class="stat-label">Caída de exportaciones de carbón Cerrejón 2025 (12,8 Mt vs. 19,1 Mt en 2024). <strong>Ingresos: USD 4.000 M (−33 %)</strong>.</div>
+        </div>
+        <div class="stat-card" style="margin-bottom: 12px;">
+          <div class="stat-num" style="color: var(--coral-soft);">65,7 %</div>
+          <div class="stat-label">Pobreza monetaria 2024 (segundo del país). 4 de cada 10 en pobreza extrema. <strong>PIB cayó −9,75 %</strong> — único departamento con caída.</div>
+        </div>
+        <div class="stat-card" style="margin-bottom: 12px;">
+          <div class="stat-num" style="color: var(--coral-soft);">333 bloqueos</div>
+          <div class="stat-label"><strong>135 días sin operación</strong> en 2024 por conflictos sociales y consultas previas. Riesgo operativo material para inversionistas.</div>
+        </div>
+        <div class="insight-banner">
+          <strong>Lectura estratégica</strong>
+          La Guajira no enfrenta un problema de <em>infraestructura</em>: enfrenta un problema de <strong>modelo</strong>. Hay activos físicos sólidos atrapados en una economía de un solo producto.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 10 — OPORTUNIDADES                                        -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="10">
+    <div class="slide-num">SLIDE <strong>10</strong> / 15</div>
+    <span class="eyebrow">Oportunidades estratégicas</span>
+    <h1 class="slide-title">El triple <em>tailwind</em> de La Guajira</h1>
+    <h2 class="slide-subtitle">Tres megatendencias convergen sobre el departamento al mismo tiempo: ubicación, energía y comercio. Ninguna otra región del Caribe colombiano tiene esta combinación.</h2>
+
+    <div class="slide-body grid-3" style="height: auto;">
+      <div class="card">
+        <div class="card-num">01</div>
+        <span class="label">Geografía</span>
+        <h3>El puerto más al norte de Suramérica</h3>
+        <p>403 km de costa, 150 km de Aruba, &lt;800 mn al Canal de Panamá. Tránsito 48–72 h al Gran Caribe.</p>
+        <ul class="bullets" style="margin-top: 10px;">
+          <li>Cercanía a corredores EE.UU. y UE</li>
+          <li>Frontera con Venezuela (régimen especial)</li>
+          <li>Zona Económica Especial Maicao/Uribia</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <span class="label">Energía</span>
+        <h3>La capital eólica de LatAm</h3>
+        <p>57 iniciativas eólicas + planta de hidrógeno verde más grande de LatAm.</p>
+        <ul class="bullets" style="margin-top: 10px;">
+          <li><strong>Windpeshi (Ecopetrol):</strong> 205 MW, USD 350 M</li>
+          <li><strong>Jemeiwaa Ka' (AES + Ecopetrol):</strong> 1.087 MW</li>
+          <li><strong>H₂ verde:</strong> 800 t/año, USD 28,5 M Ecopetrol</li>
+          <li>Meta: 1.000 MW renovables al 2030</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <span class="label">Comercio</span>
+        <h3>TLCs activos &amp; capacidad ociosa</h3>
+        <p>EE.UU., UE, Triángulo Norte habilitan rol de <em>hub redistribuidor</em>.</p>
+        <ul class="bullets" style="margin-top: 10px;">
+          <li>72 Mt de capacidad portuaria instalada</li>
+          <li>Ferrocarril Cerrejón (post-2030) reusable</li>
+          <li>Cartagena saturada — espacio para feeders</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-banner" style="margin-top: 22px;">
+      <strong>Tesis central</strong>
+      La Guajira puede convertirse en <em>el primer puerto Smart-Green de LatAm 100 % alimentado por renovables</em> — combinando cold ironing eólico, exportación de hidrógeno verde y digitalización tipo Callao. Es una propuesta única que ningún otro puerto colombiano puede replicar.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 11 — BRECHAS                                              -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="11">
+    <div class="slide-num">SLIDE <strong>11</strong> / 15</div>
+    <span class="eyebrow">Diagnóstico de brechas</span>
+    <h1 class="slide-title">Lo que <em>nos falta</em> para llegar al Smart Port</h1>
+    <h2 class="slide-subtitle">Aplicando el diagnóstico DAFO del modelo BID a La Guajira: cuatro brechas críticas que deben cerrarse en paralelo.</h2>
+
+    <div class="slide-body grid-4" style="height: auto;">
+      <div class="card" style="border-color: rgba(255,122,89,0.3);">
+        <div class="card-num" style="color: rgba(255,122,89,0.2);">01</div>
+        <span class="label" style="color: var(--coral);">Tecnológica</span>
+        <h3>Infoestructura inexistente</h3>
+        <p>Sin PCS, sin Ventanilla Única, sin Digital Twin. Conectividad 4G/5G débil en Bahía Portete y la Alta Guajira. Sistemas TOS aislados por terminal.</p>
+      </div>
+      <div class="card" style="border-color: rgba(255,122,89,0.3);">
+        <div class="card-num" style="color: rgba(255,122,89,0.2);">02</div>
+        <span class="label" style="color: var(--coral);">Infraestructura</span>
+        <h3>Conectividad terrestre frágil</h3>
+        <p>Troncal del Caribe con tramos de mantenimiento intermitente. Sin ferrocarril multipropósito (el Cerrejón es de uso privado). Acceso vial a Puerto Brisa limitado.</p>
+      </div>
+      <div class="card" style="border-color: rgba(255,122,89,0.3);">
+        <div class="card-num" style="color: rgba(255,122,89,0.2);">03</div>
+        <span class="label" style="color: var(--coral);">Gobernanza</span>
+        <h3>Consulta previa débil</h3>
+        <p>Modelos de consulta previa con comunidades locales insuficientes generan 333 bloqueos/año. Sin marco regulatorio ZESE-Smart Port.</p>
+      </div>
+      <div class="card" style="border-color: rgba(255,122,89,0.3);">
+        <div class="card-num" style="color: rgba(255,122,89,0.2);">04</div>
+        <span class="label" style="color: var(--coral);">Capital humano</span>
+        <h3>Talento técnico crítico</h3>
+        <p>Sin oferta local de formación en data, ciberseguridad o automatización portuaria. Migración del talento a Cartagena/Barranquilla.</p>
+      </div>
+    </div>
+
+    <div class="insight-banner" style="margin-top: 28px; background: linear-gradient(135deg, rgba(255,122,89,0.12), rgba(255,122,89,0.04));">
+      <strong>Riesgo crítico</strong>
+      La brecha de gobernanza es la <em>causa raíz</em> de todas las demás. Sin un nuevo pacto territorial entre Estado, comunidades y sector privado, la inversión en tecnología y energía seguirá generando bloqueos en lugar de valor.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 12 — CIERRE DE BRECHAS · TECH + INFRA                     -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="12">
+    <div class="slide-num"></div>
+    <span class="eyebrow">Cierre de brechas · 1/2</span>
+    <h1 class="slide-title">Tecnología e <em>infraestructura</em></h1>
+    <h2 class="slide-subtitle">Las dos primeras palancas para cerrar la brecha estructural. Proyectos ejecutables en el horizonte 2026–2032.</h2>
+
+    <div class="slide-body grid-2" style="height: auto;">
+      <div class="card">
+        <span class="label" style="color: var(--coral);">Brecha · Tecnológica</span>
+        <h3>Implementar PCS Guajira</h3>
+        <ul class="bullets">
+          <li>Replicar el <strong>Smart Ports Toolkit BID-Valenciaport</strong> (caso Callao).</li>
+          <li>Digital Twin de Bahía Portete para tráfico y emisiones.</li>
+          <li>Conectividad 5G privada en muelles.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="label" style="color: var(--coral);">Brecha · Infraestructura</span>
+        <h3>Conectividad multimodal</h3>
+        <ul class="bullets">
+          <li>Modernización de la Troncal del Caribe (188 km en La Guajira).</li>
+          <li>Reuso del <strong>ferrocarril Cerrejón</strong> post-2030 como línea multipropósito.</li>
+          <li>Cold ironing alimentado por Windpeshi y Jemeiwaa Ka'.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 13 — CIERRE DE BRECHAS · GOBERNANZA + TALENTO             -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="13">
+    <div class="slide-num"></div>
+    <span class="eyebrow">Cierre de brechas · 2/2</span>
+    <h1 class="slide-title">Gobernanza y <em>capital humano</em></h1>
+    <h2 class="slide-subtitle">Las dos palancas de "Smart People" que el BID identifica como condición sine qua non: sin esto, la tecnología no aterriza.</h2>
+
+    <div class="slide-body grid-2" style="height: auto;">
+      <div class="card">
+        <span class="label" style="color: var(--coral);">Brecha · Gobernanza</span>
+        <h3>Pacto territorial Smart Port</h3>
+        <ul class="bullets">
+          <li>Mesa permanente Comunidad-Estado-Privados con observatorio digital.</li>
+          <li>Marco regulatorio <strong>ZESE-Smart Port</strong> con incentivos fiscales.</li>
+          <li>Dashboard público de KPIs operativos.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="label" style="color: var(--coral);">Brecha · Capital humano</span>
+        <h3>Smart People &middot; Talento local</h3>
+        <ul class="bullets">
+          <li>Centro de Formación Smart Port con SENA y universidades regionales.</li>
+          <li>Hub de innovación en Riohacha tipo PortXL Rotterdam.</li>
+          <li>Convenio con Fundación Valenciaport para certificaciones internacionales.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 13 — HOJA DE RUTA                                         -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="13">
+    <div class="slide-num">SLIDE <strong>13</strong> / 15</div>
+    <span class="eyebrow">Hoja de Ruta 2026 — 2035</span>
+    <h1 class="slide-title">Tres fases. <em>Quick wins</em> primero, transformación estructural después</h1>
+    <h2 class="slide-subtitle">Roadmap escalonado en línea con el Capítulo 5 del Manual BID. Cada fase entrega valor medible y prepara la siguiente — sin quedar atado a un único megaproyecto.</h2>
+
+    <div class="roadmap">
+      <div class="phase short">
+        <div class="phase-dot"></div>
+        <span class="phase-time">CORTO PLAZO · 2026–2027</span>
+        <h4>Quick Wins &amp; Diagnóstico</h4>
+        <p class="lead">Construir base institucional y demostrar capacidad de ejecución antes de buscar capital pesado.</p>
+        <ul class="bullets">
+          <li>Diagnóstico Smart Port BID + DAFO regional</li>
+          <li>Pacto territorial Comunidad-Estado-Privados</li>
+          <li>Piloto PCS en Puerto Brisa</li>
+          <li>Postulación al Smart Ports Toolkit BID-Valenciaport</li>
+          <li>Plan maestro digital + cuadro de mando integral (CMI)</li>
+        </ul>
+      </div>
+      <div class="phase medium">
+        <div class="phase-dot"></div>
+        <span class="phase-time">MEDIO PLAZO · 2028–2030</span>
+        <h4>Plataforma operativa</h4>
+        <p class="lead">Construcción de la infoestructura y arranque de la diversificación de carga.</p>
+        <ul class="bullets">
+          <li>PCS Guajira en producción (todos los puertos)</li>
+          <li>Cold ironing en Puerto Bolívar &amp; Brisa</li>
+          <li>Centro de Formación Smart Port</li>
+          <li>Apertura de Puerto Nuevo a carga multipropósito</li>
+          <li>ZESE-Smart Port aprobada y operando</li>
+        </ul>
+      </div>
+      <div class="phase long">
+        <div class="phase-dot"></div>
+        <span class="phase-time">LARGO PLAZO · 2031–2035</span>
+        <h4>Hub Smart-Green del Caribe</h4>
+        <p class="lead">La Guajira como referente regional en puerto inteligente alimentado por renovables.</p>
+        <ul class="bullets">
+          <li>Digital Twin operativo en Bahía Portete</li>
+          <li>Reconversión ferrocarril Cerrejón a multipropósito</li>
+          <li>Exportación de hidrógeno verde</li>
+          <li>Hub de transbordo Caribe para feeders</li>
+          <li>Caso BID replicable para LatAm</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-banner" style="margin-top: 22px;">
+      <strong>Project Management aplicado</strong>
+      Cada fase tiene <em>entregables verificables</em>, dependencias críticas explícitas y un cuadro de mando integral (BSC) tipo BID con perspectivas financiera, cliente, interna y aprendizaje. Sin gates ni KPIs, no hay roadmap — hay deseo.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 14 — IMPACTO ESPERADO                                     -->
+  <!-- ============================================================ -->
+  <section class="slide" data-slide="14">
+    <div class="slide-num">SLIDE <strong>14</strong> / 15</div>
+    <span class="eyebrow">Impacto esperado</span>
+    <h1 class="slide-title">Lo que está en juego: el <em>retorno triple</em></h1>
+    <h2 class="slide-subtitle">Económico, social y ambiental. La transformación Smart Port no es solo un proyecto portuario: es la palanca para reposicionar a La Guajira en la economía colombiana.</h2>
+
+    <div class="slide-body grid-3" style="height: auto;">
+      <div class="card" style="background: linear-gradient(160deg, rgba(34,211,238,0.1), rgba(29,68,128,0.04));">
+        <span class="label">Económico</span>
+        <h3>Diversificación &amp; ingresos</h3>
+        <ul class="bullets">
+          <li>Diversificación más allá del carbón térmico (en declive estructural).</li>
+          <li>Captura de transbordo Caribe — feeders Centroamérica-EU-USA.</li>
+          <li>Atracción de inversión BID Invest, IFC, FMO con perfil ESG.</li>
+          <li>Recuperación parcial del PIB departamental (caída −9,75 % en 2024).</li>
+          <li>Exportación de H₂ verde como nueva matriz de ingresos.</li>
+        </ul>
+      </div>
+      <div class="card" style="background: linear-gradient(160deg, rgba(244,196,48,0.1), rgba(255,122,89,0.04));">
+        <span class="label">Social</span>
+        <h3>Empleo cualificado &amp; equidad</h3>
+        <ul class="bullets">
+          <li>Generación de empleos técnicos cualificados (data, ciber, automatización).</li>
+          <li>Inclusión de comunidades locales como socio activo, no solo afectado.</li>
+          <li>Reducción gradual de pobreza monetaria (hoy 65,7 %).</li>
+          <li>Hub educativo regional con SENA + universidades + Valenciaport.</li>
+          <li>Reducción de bloqueos por gobernanza territorial dialogada.</li>
+        </ul>
+      </div>
+      <div class="card" style="background: linear-gradient(160deg, rgba(34,211,238,0.1), rgba(15,118,110,0.04));">
+        <span class="label">Ambiental</span>
+        <h3>Cero emisiones &amp; circularidad</h3>
+        <ul class="bullets">
+          <li>Primer puerto LatAm con muelle 100 % renovable (cold ironing eólico).</li>
+          <li>Monitoreo IoT calidad de aire/agua/ruido.</li>
+          <li>Economía circular en residuos portuarios y desguaces.</li>
+          <li>Trazabilidad ambiental para CBAM (UE) y exportadores grandes.</li>
+          <li>Caso de transición justa post-carbón documentable para BID.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stat-row" style="margin-top: 28px;">
+      <div class="stat"><div class="n">USD 600 M</div><div class="d">Estrategia BID-Colombia 2024–2027</div></div>
+      <div class="stat"><div class="n">72 Mt</div><div class="d">Capacidad instalada Bolívar + Brisa</div></div>
+      <div class="stat"><div class="n">1.087 MW</div><div class="d">Eólico Jemeiwaa Ka' (Ecopetrol)</div></div>
+      <div class="stat"><div class="n">800 t/año</div><div class="d">H₂ verde planeado (la mayor de LatAm)</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 15 — CIERRE                                               -->
+  <!-- ============================================================ -->
+  <section class="slide closing" data-slide="15">
+    <div class="slide-num">SLIDE <strong>15</strong> / 15</div>
+    <span class="eyebrow">Cierre</span>
+    <h1 class="closing-msg">
+      La Guajira no necesita <span class="h">esperar</span> para ser un Puerto Inteligente.<br/>
+      Necesita <span class="h">decidir serlo</span>.
+    </h1>
+    <p class="closing-cta">
+      La infraestructura está. La energía está. El marco BID está. Lo que falta es <strong>liderazgo institucional</strong> para articular, <strong>gobernanza compartida</strong> con las comunidades locales, y un <strong>roadmap ejecutable</strong> que entregue valor en cada fase. Esa es la conversación que esta presentación quiere abrir.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="n">2026 → 2035</div>
+        <div class="d">Horizonte de transformación</div>
+      </div>
+      <div class="stat">
+        <div class="n">5 dimensiones</div>
+        <div class="d">Operacional · Ambiental · Logística · Gobernanza · Tecnológica</div>
+      </div>
+      <div class="stat">
+        <div class="n">3 fases</div>
+        <div class="d">Quick wins → Plataforma → Hub Smart-Green</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; width: 100%; position: relative; z-index: 2;">
+      <div style="font-size: 13px; color: var(--slate-400); line-height: 1.6;">
+        <strong style="color: #fff; font-size: 16px; display: block; margin-bottom: 4px;">Tatiana Rabat</strong>
+        Project Management &amp; Estrategia Portuaria<br/>
+        <span style="color: var(--teal-400);">— Llamado a la acción —</span>
+      </div>
+      <div style="text-align: right; font-size: 11px; color: var(--slate-500); letter-spacing: 0.16em; text-transform: uppercase;">
+        Fuentes: BID (2020) · Mintransporte 2024<br/>
+        DANE · ANI · Cerrejón · Ecopetrol · Valenciaport<br/>
+        <strong style="color: var(--gold);">Gracias.</strong>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Navigation bar -->
+<div class="nav-bar">
+  <button class="nav-btn" id="prev" aria-label="Anterior">‹</button>
+  <span class="nav-counter"><strong id="cur">01</strong> / <span id="tot">15</span></span>
+  <button class="nav-btn" id="next" aria-label="Siguiente">›</button>
+</div>
+
+<!-- Progress dots -->
+<div class="progress" id="progress"></div>
+
+<!-- Help -->
+<div class="help">
+  <kbd>←</kbd> <kbd>→</kbd> Navegar · <kbd>Esc</kbd> Vista general
+</div>
+
+<script>
+  (function() {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+    const cur = document.getElementById('cur');
+    const tot = document.getElementById('tot');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const progress = document.getElementById('progress');
+    let idx = 0;
+
+    tot.textContent = String(total).padStart(2, '0');
+
+    // Auto-fill the slide-num element on each slide so renumbering is automatic.
+    slides.forEach((s, i) => {
+      const numEl = s.querySelector('.slide-num');
+      if (numEl) {
+        numEl.innerHTML = 'SLIDE <strong>' + String(i + 1).padStart(2, '0') + '</strong> / ' + String(total).padStart(2, '0');
+      }
+    });
+
+    // Build progress dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.title = 'Slide ' + (i + 1);
+      dot.addEventListener('click', () => go(i));
+      progress.appendChild(dot);
+    });
+
+    function go(n) {
+      n = Math.max(0, Math.min(total - 1, n));
+      if (n === idx) return;
+      slides[idx].classList.remove('active');
+      slides[idx].classList.add(n > idx ? 'exit-left' : '');
+      idx = n;
+      slides[idx].classList.remove('exit-left');
+      slides[idx].classList.add('active');
+      update();
+    }
+
+    function update() {
+      cur.textContent = String(idx + 1).padStart(2, '0');
+      prevBtn.disabled = idx === 0;
+      nextBtn.disabled = idx === total - 1;
+      Array.from(progress.children).forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
+    prevBtn.addEventListener('click', () => go(idx - 1));
+    nextBtn.addEventListener('click', () => go(idx + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(idx + 1); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(idx - 1); }
+      else if (e.key === 'Home') { e.preventDefault(); go(0); }
+      else if (e.key === 'End') { e.preventDefault(); go(total - 1); }
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+    document.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(dx) > 60) go(idx + (dx < 0 ? 1 : -1));
+    });
+
+    update();
+  })();
+</script>
+
+</body>
+</html>
